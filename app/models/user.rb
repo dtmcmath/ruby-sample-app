@@ -23,6 +23,14 @@ class User < ActiveRecord::Base
     return encrypt(submitted_password) == encrypted_password
   end
   
+  def self.authenticate(email, submitted_password)
+    user = find_by_email(email)
+    return nil if user.nil?
+    return user if user.has_password?(submitted_password)
+    # else
+    return nil
+  end
+  
   private
     def encrypt_password
       self.salt = make_salt if new_record?
