@@ -127,6 +127,15 @@ describe UsersController do
       get :show, :id => @user
       response.should have_selector( 'h1>img', :class => 'gravatar' )
     end
+
+    it 'should show the users microposts' do
+      mp1 = Factory(:micropost, :user => @user, :content => 'Foo bar' )
+      mp2 = Factory(:micropost, :user => @user, :content => 'Baz quux' )
+      get :show, :id => @user
+      [mp1, mp2].each do |m|
+        response.should have_selector( 'span.content', :content => m.content )
+      end
+    end
   end
   
   describe 'POST create' do
