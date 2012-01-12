@@ -12,7 +12,7 @@ describe UsersController do
       end
     end
     
-    describe 'for signed-in uses' do
+    describe 'for signed-in users' do
       before(:each) do
         @user = test_sign_in(Factory(:user))
         second = Factory(:user, :email => 'another@example.com' )
