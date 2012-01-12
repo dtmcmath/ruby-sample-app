@@ -41,6 +41,11 @@ class User < ActiveRecord::Base
     return nil
   end
   
+  def feed
+    # This is preliminary... Full implementation in ch. 12
+    Micropost.where('user_id=?', id)
+  end
+  
   private
     def encrypt_password
       self.salt = make_salt if new_record?
