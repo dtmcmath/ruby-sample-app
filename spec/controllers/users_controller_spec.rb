@@ -50,6 +50,25 @@ describe UsersController do
         response.should have_selector( 'a', :href => '/users?page=2',
                                             :content => 'Next' )
       end
+
+      describe 'who are not administrators' do
+        it 'should not show delete links' do
+          get :index
+          @users[0..2].each do |user|
+            response.should_not have_selector('a', :href => user_path(user), 'data-method' => 'delete')
+          end
+        end
+      end
+      
+      describe 'who are administrators' do
+        it 'should show delete links' do
+          @user.toggle!(:admin)
+          get :index
+          @users[0..2].each do |user|
+            response.should have_selector('a', :href => user_path(user), 'data-method' => 'delete')
+          end
+        end
+      end
     end
   end
 
