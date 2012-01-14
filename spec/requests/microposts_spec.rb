@@ -37,9 +37,4 @@ describe "Microposts" do
       end
     end
   end
-  describe "GET /microposts" do
-    it "works! (now write some real specs)" do
-      get microposts_path
-    end
-  end
 end
